@@ -1,26 +1,20 @@
-
-class Vertice:
-    def __init__(self, x, y, z):
-        self.x = x
-        self.y = y
-        self.z = z
-    def imprime(self):
-        print(self.x, self.y, self. z)
-
-
 class Aresta:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-    def imprime(self):
-        print(self.a.imprime(), self.b.imprime())
-
+    def __init__(self, inicio, fim):
+        self.inicio = inicio
+        self.fim = fim
 
 class Poligono:
-    def __init__(self, vertices, arestas):
-        self.vertices = vertices
+    def __init__(self, arestas):
+        self.vertices = []
         self.arestas = arestas
 
+    def addVertice(self, vert):
+        for vertice in vert:
+            self.vertices.append(vertice)
+
+    '''def addAresta(self, ar):
+        for (inicio, fim) in ar:
+            self.arestas.append(Aresta(self.vertices[inicio], self.vertices[fim]))'''
 
 def get_vertices(pol):
     lista = []
@@ -33,3 +27,5 @@ def get_arestas(pol):
     for ar in pol.arestas:
         lista.append(ar)
     return lista
+
+
