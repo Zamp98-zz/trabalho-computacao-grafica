@@ -31,7 +31,6 @@ def rotate(figura, x, y, z, fator):
     for a in vertices:
         temp.append(a)
     B = np.array(temp)
-    fig = figura
     if(x == 1):
         C = np.dot(B, Rx)
         figura = poligonos.Poligono(arestas)
@@ -45,6 +44,7 @@ def rotate(figura, x, y, z, fator):
         figura = poligonos.Poligono(arestas)
         figura.addVertice(C)
     figura = poligonos.setCentro(figura)
+
     return figura
 
 def scale(figura, fator):
@@ -94,31 +94,8 @@ def translate(figura, x, y, z):
         C.append(linha)
     fig = poligonos.Poligono(arestas)
     fig.addVertice(C)
-    print("\n after translate:", C, "\n")
+    #print("\n after translate:", C, "\n")
+    fig = poligonos.setCentro(fig)
     return fig
 
 
-'''def translate(figura, eixo, d, ar):
-
-    vertice = poligonos.get_vertices(figura)
-    fig = poligonos.Poligono(ar)
-
-    if(eixo == 'x'):
-        for i in range(len(vertice)):
-            vertice[i][0] += transX[0] + d
-    elif (eixo == 'y'):
-        for i in range(len(vertice)):
-            vertice[i][1] += transY[1] + d
-    elif (eixo == 'z'):
-        for i in range(len(vertice)):
-            vertice[i][2] += transY[2] + d
-
-    if(quadrosChave.quadroChaveTranX(figura) and transX[0] == 20):
-        transX[0] *= -1
-        #print(transX[0])
-    #if (quadrosChave.quadroChaveTranY(figura)):
-    #    transX[1] *= -1
-    #if (quadrosChave.quadroChaveTranZ(figura)):
-    #    transX[2] *= -1
-    fig.addVertice(vertice)
-    return fig'''''

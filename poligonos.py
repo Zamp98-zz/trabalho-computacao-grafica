@@ -23,7 +23,7 @@ def setCentro(pol):
     centro[0] = centro[0]/len(pol.vertices)
     centro[1] = centro[1] / len(pol.vertices)
     centro[2] = centro[2] / len(pol.vertices)
-    print(centro)
+    #print(centro)
     pol.vertices.append(centro)
     return pol
 
@@ -46,7 +46,7 @@ def tamanho_aresta(pol):
         tZ = pol.vertices[aresta[0]][2] - pol.vertices[aresta[1]][2]
         H = m.sqrt(tX**2 + tY**2)
         tamanho = m.sqrt(H**2 + tZ**2)
-        print("tamanho das arestas:", round(tamanho, 0))
+        #print("tamanho das arestas:", round(tamanho, 0))
         return int(round(tamanho, 0))
 
 
@@ -83,8 +83,8 @@ def get_cubo():
     return fig
 
 def imprime(figura):
-    print("imprime figura:")
+    #print("imprime figura:")
     for v in figura.vertices:
         print(v)
-    #for a in figura.arestas:
-        #print(a)
+    for a in figura.arestas:
+        print(a)
