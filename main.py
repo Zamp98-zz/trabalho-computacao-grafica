@@ -38,7 +38,7 @@ def main():
     a5 = poligonos.Aresta(v2, v4)'''
 
     fig = poligonos.Poligono([a0, a1, a2])
-
+    fig1 = poligonos.get_cubo()
     fig.addVertice([v1, v2, v3])
 
     background = pygame.Surface(janela.get_size())
@@ -59,8 +59,10 @@ def main():
         desenha(fig, janela)
         fig = move.translate(fig, 'x', 0, [a0, a1, a2])
         fig = move.translate(fig, 'y', 0, [a0, a1, a2])
+        desenha(fig1, janela)
+        fig1 = move.translate(fig1, 'y', 1, fig1.arestas)
         time.sleep(1)
-        pygame.display.flip()
+        pygame.display.update()
 
 
 main()
