@@ -6,7 +6,7 @@ vetTranX = [320, 0 , 0]
 def quadroChaveTranX(figura):
 
     vertices = get_vertices(figura)
-    print(vertices)
+    #print(vertices)
 
     for i in range(len(vertices)):
         if(vertices[i][0] >= vetTranX[0]):
