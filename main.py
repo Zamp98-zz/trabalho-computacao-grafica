@@ -1,10 +1,10 @@
 import pygame
 import poligonos
-import time
 import transform
 
+
 altura = 700
-largura = 1280
+largura = 1366
 
 v0 = [0, 0, 0]
 v1 = [100, 0, 0]
@@ -15,13 +15,14 @@ a2 = [1, 2]
 
 
 def desenha(figura, janela):
-
     arestas = poligonos.get_arestas(figura)
-
     for i in range(len(arestas)):
+        pygame.draw.line(janela, (255, 255, 255),
+                           (figura.vertices.vertice[arestas[i][0]][0], figura.vertices.vertice[arestas[i][0]][1]),
+                           (figura.vertices.vertice[arestas[i][1]][0], figura.vertices.vertice[arestas[i][1]][1]),1)
 
-        pygame.draw.aaline(janela, (255, 255, 255), (figura.vertices[arestas[i][0]][0],figura.vertices[arestas[i][0]][1]), (figura.vertices[arestas[i][1]][0],figura.vertices[arestas[i][1]][1]))
 
+clock = pygame.time.Clock()
 
 def main():
     pygame.display.init()
@@ -29,27 +30,16 @@ def main():
     janela = pygame.display.set_mode(size, 0, 0, 0)
     pygame.display.set_caption("Computação Gráfica")
 
-    '''v1 = poligonos.Vertice(50, 50, 50, 1)
-    v2 = poligonos.Vertice(100, 200, 60, 1)
-    v3 = poligonos.Vertice(100, 300, 30, 1)
-    v4 = poligonos.Vertice(100, 400, 30, 1)
-    a0 = poligonos.Aresta(v1, v2)
-    a1 = poligonos.Aresta(v2, v3)
-    a2 = poligonos.Aresta(v1, v3)
-    a3 = poligonos.Aresta(v1, v4)
-    a4 = poligonos.Aresta(v3, v4)
-    a5 = poligonos.Aresta(v2, v4)'''
-
-    #fig = poligonos.Poligono([a0, a1, a2])
-    fig1 = poligonos.get_cubo()
-    #fig.addVertice([v0, v1, v2])
-
-    background = pygame.Surface(janela.get_size())
-    background = background.convert()
+    background = pygame.Surface(janela.get_size(), flags=pygame.SRCALPHA)
+    background = background.convert_alpha()
     background.fill((0, 0, 0))
+
+    fig1 = poligonos.get_cubo()
     fig1 = poligonos.setCentro(fig1)
 
-    fig1 = transform.translate(fig1, largura/2, altura/2, 0)
+    fig2 = poligonos.get_zig()
+    fig2 = poligonos.setCentro(fig2)
+    fig2 = transform.scale(fig2, 20)
 
     while True:
         for event in pygame.event.get():
@@ -57,23 +47,27 @@ def main():
                 pygame.quit()
                 quit()
 
-        janela.blit(background, (0,0))
-        #fig1 = transform.scale(fig1, 1.1)
-        fig1 = transform.translate(fig1, -largura / 2, -altura / 2, 0)
-        fig1 = transform.rotate(fig1, 1, 0, 0, 1/800)
-        fig1 = transform.rotate(fig1, 0, 1, 0, 1/800)
-        fig1 = transform.rotate(fig1, 0, 0, 1, 1/800)
-        fig1 = transform.translate(fig1, largura / 2, altura / 2, 0)
-        #desenha(fig, janela)
-        #fig = transform.translate(fig, 'x', 0, [a0, a1, a2])
-        #fig = transform.translate(fig, 'y', 0, [a0, a1, a2])
+        fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
+        fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
+        fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
+        cX = fig1.centro[0]
+        cY = fig1.centro[1]
+        cZ = fig1.centro[2]
+        fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
         desenha(fig1, janela)
 
-        #poligonos.imprime(fig1)
-        poligonos.tamanho_aresta(fig1)
-        #fig1 = transform.translate(fig1, 'x', 1, fig1.arestas)
-        time.sleep(.001)
+        fig2 = transform.rotate(fig2, 1, 0, 0, 1/200)
+        fig2 = transform.rotate(fig2, 0, 1, 0, 1 / 200)
+        fig2 = transform.rotate(fig2, 0, 0, 1, 1 / 200)
+        cX1 = fig2.centro[0]
+        cY1 = fig2.centro[1]
+        cZ1 = fig2.centro[2]
+        fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+        desenha(fig2, janela)
+
+        clock.tick(60)
         pygame.display.update()
+        janela.fill((0, 0, 0, 1))
 
 
 main()
