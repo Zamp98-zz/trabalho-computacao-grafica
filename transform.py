@@ -64,7 +64,7 @@ def scale(figura, fator):
 
     C = np.dot(B, A)
 
-    fig = poligonos.Poligono(arestas)
+    fig = poligonos.Poligono(arestas, figura.centro)
     fig.addVertice(C)
     # print("\n", C, "\n")
     fig = poligonos.setCentro(fig)

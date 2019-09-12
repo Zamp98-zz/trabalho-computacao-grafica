@@ -1,6 +1,17 @@
 import math as m
 
 centro = [0, 0, 0, 1]
+
+
+class Aresta:
+    def __init__(self, aresta):
+        self.aresta = aresta
+
+class Vertice:
+    def __init__(self, vertice):
+        self.vertice = vertice
+
+
 class Poligono:
     def __init__(self, arestas, centro):
         self.vertices = []
@@ -24,7 +35,7 @@ def setCentro(pol):
     centro[0] = centro[0] / len(pol.vertices)
     centro[1] = centro[1] / len(pol.vertices)
     centro[2] = centro[2] / len(pol.vertices)
-    print("Set centro:",centro)
+    #print("Set centro:",centro)
     pol.centro = centro
     return pol
 
@@ -91,3 +102,62 @@ def imprime(figura):
         print("Arestas:",a)
     centro = figura.centro
     print("Centro:", centro)
+
+def get_zig():
+    #primeira sequencia
+    #da origem pra cima
+    v0 = [0, 0, 0, 1]
+    v1 = [3, 4, 0, 1]
+    v2 = [0 , 8 , 0, 1]
+    v3 = [3, 12, 0, 1]
+    #segunda
+    #do v3 pra baixo
+    v4 = [3, 12, 3, 1]
+    v5 = [0, 8, 3, 1]
+    v6 = [3, 4, 3, 1]
+    v7 = [0, 0, 3, 1]
+    #terceira
+    v8 = [3, 0, 0, 1]
+    v9 = [6, 4, 0, 1]
+    v10 = [3, 8, 0, 1]
+    v11 = [6, 12, 0, 1]
+
+    v12 = [6, 12, 3, 1]
+    v13 = [3, 8, 3, 1]
+    v14 = [6, 4, 3, 1]
+    v15 = [3, 0, 3, 1]
+
+
+    #g1
+    a0 = [0, 1]
+    a1 = [1, 2]
+    a2 = [2, 3]
+    a3 = [3, 4]
+    a4 = [4, 5]
+    a5 = [5, 6]
+    a6 = [6, 7]
+    a7 = [7, 0]
+    #dobras da primeira parte
+    a8 = [1, 6]
+    a9 = [2, 5]
+    #ligação entre g1 e g2
+    a10 = [0, 8]
+    a11 = [3, 11]
+    #g2
+    a12 = [8, 9]
+    a13 = [9, 10]
+    a14 = [10, 11]
+    a15 = [11, 12]
+    a16 = [12, 4]
+    a17 = [12, 13]
+    a18 = [13, 14]
+    a19 = [14, 15]
+    a20 = [15, 7]
+    a21 = [15, 8]
+    a22 = [9, 14]
+    a23 = [10, 13]
+    a24 = [10, 2]
+    a25 = [13, 5]
+    fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25], [0, 0, 0, 1])
+    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+    return fig
