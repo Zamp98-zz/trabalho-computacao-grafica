@@ -22,6 +22,8 @@ class Poligono:
         self.desY = 0
         self.inverteX = False
         self.inverteY = False
+        self.moveX = False
+        self.moveY =False
 
     def addVertice(self, vert):
         self.vertices = Vertice(vert)
@@ -53,18 +55,21 @@ class Poligono:
         return self.inverteY
 
     def deslocamentoX(self):
-        if(self.inverteX):
-            self.desX -= 1
-        else:
-            self.desX += 1
+        if(self.moveX):
+            if(self.inverteX):
+                self.desX -= 1.5
+            else:
+                self.desX += 1.5
 
         return self.desX
 
     def deslocamentoY(self):
-        if(self.inverteY):
-            self.desY -= 1
-        else:
-            self.desY += 1
+        if(self.moveY):
+            if(self.inverteY):
+                self.desY += 1  
+            else:
+                self.desY -= 1
+
         return self.desY
 
     def setDeslocamentoX(self, deslocamento):
@@ -82,10 +87,17 @@ class Poligono:
     def getCentro(self):
         return self.centro
 
-    '''def addAresta(self, ar):
-        for (inicio, fim) in ar:
-            self.arestas.append(Aresta(self.vertices[inicio], self.vertices[fim]))'''
+    def setMoveX(self, moveX):
+        self.moveX = moveX
 
+    def setMoveY(self, moveY):
+        self.moveY = moveY
+
+    def getMoveX(self):
+        return self.moveX
+
+    def getMoveY(self):
+        return self.moveY
 
 def setCentro(pol):
     centro = [0, 0, 0, 1]

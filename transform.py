@@ -13,6 +13,8 @@ def rotate(figura, x, y, z, fator):
     deslocamentoY = figura.getDeslocamentoY()
     sentidoX = figura.getSentidoX()
     sentidoY = figura.getSentidoY()
+    moveX = figura.getMoveX()
+    moveY = figura.getMoveY()
 
     cos = m.cos(fator)
     sin = m.sin(fator)
@@ -53,6 +55,8 @@ def rotate(figura, x, y, z, fator):
     figura.setDeslocamentoY(deslocamentoY)
     figura.setSentidoX(sentidoX)
     figura.setSentidoY(sentidoY)
+    figura.setMoveX(moveX)
+    figura.setMoveY(moveY)
 
 
     return figura
@@ -80,6 +84,9 @@ def scale(figura, fator):
     fig.setDeslocamentoY(figura.getDeslocamentoY())
     fig.setSentidoX(figura.getSentidoX())
     fig.setSentidoY(figura.getSentidoY())
+    fig.setMoveX(figura.getMoveX())
+    fig.setMoveY(figura.getMoveY())
+
     return fig
 
 def translate(figura, x, y, z):
@@ -88,9 +95,17 @@ def translate(figura, x, y, z):
     deslocamentoY = figura.deslocamentoY()
 
     if (quadrosChave.quadroChaveTransX(figura)):
+
+        if(figura.getMoveY()):
+            figura.setMoveY(False)
+            figura.setSentidoY(False)
+        else:
+            figura.setMoveY(True)
+
         figura.inverteSentidoX()
 
     if (quadrosChave.quadroChaveTransY(figura)):
+        print(figura.getSentidoY)
         figura.inverteSentidoY()
 
     T = np.array([[1, 0, 0, x + deslocamentoX],
@@ -126,4 +141,7 @@ def translate(figura, x, y, z):
     fig.setDeslocamentoY(deslocamentoY)
     fig.setSentidoX(figura.getSentidoX())
     fig.setSentidoY(figura.getSentidoY())
+    fig.setMoveX(figura.getMoveX())
+    fig.setMoveY(figura.getMoveY())
+
     return fig

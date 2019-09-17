@@ -1,7 +1,7 @@
 from poligonos import get_vertices
 
-vetTrans = [[1000, 500, 0],
-            [150, 100, 0]]
+vetTrans = [[1150, 500, 0],
+            [150, 80, 0]]
 
 def quadroChaveTransX(figura):
     centro = figura.getCentro()
@@ -17,9 +17,9 @@ def quadroChaveTransX(figura):
 def quadroChaveTransY(figura):
     centro = figura.getCentro()
     # print(vertices)
-    if (centro[1] >= vetTrans[0][1] and not figura.getSentidoY()):
+    if (centro[1] >= vetTrans[0][1] and figura.getSentidoY()):
         return True
-    if (centro[1] <= vetTrans[1][1] and figura.getSentidoY()):
+    if (centro[1] <= vetTrans[1][1] and not figura.getSentidoY()):
         return True
 
     return False
