@@ -3,9 +3,62 @@ import poligonos
 import quadrosChave
 import numpy as np
 
-transX = [20, 0, 0]
-transY = [0, 20, 0]
-transZ = [0, 0, 1]
+def shearing(figura, x, y, matriz):
+
+    if(matriz == 1):
+        S = np.array([
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1]
+        ])
+
+    elif(matriz == 2):
+        S = np.array([
+            [1, 0, 0, 0],
+            [x, 1, 0, 0],
+            [0, y, 1, 0],
+            [0, 0, 0, 1]
+        ])
+
+    elif(matriz == 3):
+
+        S = np.array([
+            [1, y, 0, 0],
+            [0, 1, 0, 0],
+            [x, 0, 1, 0],
+            [0, 0, 0, 1]
+        ])
+
+    elif(matriz == 4):
+        S = np.array([
+            [1, 0, 0, 0],
+            [0, 1, 0, 0],
+            [x, y, 1, 0],
+            [0, 0, 0, 1]
+        ])
+
+    vertices = poligonos.get_vertices(figura)
+    temp = []
+    arestas = poligonos.get_arestas(figura)
+    for a in vertices:
+        temp.append(a)
+    B = np.array(temp)
+
+    R = np.dot(B, S)
+
+    fig = poligonos.Poligono(arestas, figura.centro)
+    fig.addVertice(R)
+    # print("\n", C, "\n")
+    fig = poligonos.setCentro(fig)
+    fig.setDeslocamentoX(figura.getDeslocamentoX())
+    fig.setDeslocamentoY(figura.getDeslocamentoY())
+    fig.setSentidoX(figura.getSentidoX())
+    fig.setSentidoY(figura.getSentidoY())
+    fig.setMoveX(figura.getMoveX())
+    fig.setMoveY(figura.getMoveY())
+
+    return fig
 
 def rotate(figura, x, y, z, fator):
 
@@ -89,6 +142,49 @@ def scale(figura, fator):
 
     return fig
 
+def reflect(figura, qx, qy, qz):
+
+    x = 1
+    y = 1
+    z = 1
+
+    if(qx == True):
+        y = -1
+        z = -1
+    if(qy == True):
+        x = -1
+        z = -1
+    if(qz == True):
+        x = -1
+        y = -1
+
+    A = np.array([[x, 0, 0, 0],
+                   [0, y, 0, 0],
+                   [0, 0, z, 0],
+                   [0, 0, 0, 1]]
+                  )
+    vertices = poligonos.get_vertices(figura)
+    temp = []
+    arestas = poligonos.get_arestas(figura)
+    for a in vertices:
+        temp.append(a)
+    B = np.array(temp)
+
+    C = np.dot(B, A)
+
+    fig = poligonos.Poligono(arestas, figura.centro)
+    fig.addVertice(C)
+    # print("\n", C, "\n")
+    fig = poligonos.setCentro(fig)
+    fig.setDeslocamentoX(figura.getDeslocamentoX())
+    fig.setDeslocamentoY(figura.getDeslocamentoY())
+    fig.setSentidoX(figura.getSentidoX())
+    fig.setSentidoY(figura.getSentidoY())
+    fig.setMoveX(figura.getMoveX())
+    fig.setMoveY(figura.getMoveY())
+
+    return fig
+
 def translate(figura, x, y, z):
 
     deslocamentoX = figura.deslocamentoX()
@@ -105,7 +201,7 @@ def translate(figura, x, y, z):
         figura.inverteSentidoX()
 
     if (quadrosChave.quadroChaveTransY(figura)):
-        print(figura.getSentidoY)
+        #print(figura.getSentidoY)
         figura.inverteSentidoY()
 
     T = np.array([[1, 0, 0, x + deslocamentoX],

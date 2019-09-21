@@ -9,9 +9,9 @@ class Aresta:
 
 class Vertice:
     def __init__(self, vert):
-        self.vertice = []
+        self.pontos = []
         for vertice in vert:
-            self.vertice.append(vertice)
+            self.pontos.append(vertice)
 
 class Poligono:
     def __init__(self, arestas, centro):
@@ -101,13 +101,13 @@ class Poligono:
 
 def setCentro(pol):
     centro = [0, 0, 0, 1]
-    for v in pol.vertices.vertice:
+    for v in pol.vertices.pontos:
         centro[0] += v[0]
         centro[1] += v[1]
         centro[2] += v[2]
-    centro[0] = centro[0] / len(pol.vertices.vertice)
-    centro[1] = centro[1] / len(pol.vertices.vertice)
-    centro[2] = centro[2] / len(pol.vertices.vertice)
+    centro[0] = centro[0] / len(pol.vertices.pontos)
+    centro[1] = centro[1] / len(pol.vertices.pontos)
+    centro[2] = centro[2] / len(pol.vertices.pontos)
     #print("Set centro:",centro)
     pol.centro = centro
     return pol
@@ -115,7 +115,7 @@ def setCentro(pol):
 
 def get_vertices(pol):
     lista = []
-    for vert in pol.vertices.vertice:
+    for vert in pol.vertices.pontos:
         lista.append(vert)
     return lista
 
