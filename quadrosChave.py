@@ -1,4 +1,4 @@
-from poligonos import get_vertices
+from poligonos import *
 
 vetTrans = [[1150, 500, 0],
             [150, 80, 0]]

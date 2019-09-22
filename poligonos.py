@@ -99,6 +99,21 @@ class Poligono:
     def getMoveY(self):
         return self.moveY
 
+
+def project(win_width, win_height, fov, viewer_distance,matriz):
+    new = []
+    for i in matriz:
+        temp = []
+        factor = fov / (viewer_distance + i[2])
+        x = i[0] * factor + win_width / 2
+        y = i[1] * factor + win_height / 2
+        temp.append(x)
+        temp.append(y)
+        temp.append(1)
+        temp.append(1)
+        new.append(temp)
+    return new
+
 def setCentro(pol):
     centro = [0, 0, 0, 1]
     for v in pol.vertices.pontos:
@@ -161,9 +176,12 @@ def get_cubo():
     a10 = [6, 2]
     a11 = [7, 1]
 
+    v = [v0, v1, v2, v3, v4, v5, v6, v7]
+    nv = project(1280,700,256,512,v)
+
     # a2.imprime()
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11], [0, 0, 0, 1])
-    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7])
+    fig.addVertice(nv)
     return fig
 
 
@@ -231,6 +249,9 @@ def get_zig():
     a23 = [10, 13]
     a24 = [10, 2]
     a25 = [13, 5]
+    v = [v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15]
+    nv = project(1280, 700, 256, 512, v)
+
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25], [0, 0, 0, 1])
-    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+    fig.addVertice(nv)
     return fig

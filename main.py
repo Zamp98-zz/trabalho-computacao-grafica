@@ -58,14 +58,14 @@ def main():
                 pygame.quit()
                 quit()
 
-        #fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
-       # fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
-        #fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
+        fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
+        fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
+        fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
         cX = fig1.centro[0]
         cY = fig1.centro[1]
         cZ = fig1.centro[2]
-        fig1 = transform.reflect(fig1, True, True, False)
-        #fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
+        # fig1 = transform.reflect(fig1, True, True, False)
+        fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
         plano.projetaPoligono(fig1, janela)
 
         fig2 = transform.rotate(fig2, 1, 0, 0, 1/200)
@@ -77,7 +77,7 @@ def main():
         fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
         plano.projetaPoligono(fig2, janela)
 
-        clock.tick(1)
+        clock.tick(10)
         pygame.display.update()
         janela.fill((0, 0, 0, 1))
 
