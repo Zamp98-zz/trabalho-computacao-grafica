@@ -1,13 +1,12 @@
 import pygame
-import os
 import plano
 import poligonos
+import quadrosChave
 import transform
 
-import time
 
-altura = 700
-largura = 1280
+altura = 580
+largura = 960
 
 v0 = [0, 0, 0]
 v1 = [100, 0, 0]
@@ -47,38 +46,77 @@ def main():
 
     fig2 = poligonos.get_zig()
     fig2 = poligonos.setCentro(fig2)
-    fig2 = transform.scale(fig2, 20)
+    scale = 10
+    fig2 = transform.scale(fig2, scale)
 
     time = 1/ pygame.time.get_ticks()
 
+
+
     while True:
-        print(time)
+
+        #print(time)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+        scale = fig2.getScale()
+        print("1", scale)
+        fig2 = transform.aumentaEscala(fig2, scale, janela, largura, altura, 20)
 
-        #fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
-       # fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
-        #fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
-        cX = fig1.centro[0]
-        cY = fig1.centro[1]
-        cZ = fig1.centro[2]
-        fig1 = transform.reflect(fig1, True, True, False)
-        #fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
-        plano.projetaPoligono(fig1, janela)
+        scale = fig2.getScale()
+        print("2", scale)
+        fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura, 10)
 
-        fig2 = transform.rotate(fig2, 1, 0, 0, 1/200)
-        fig2 = transform.rotate(fig2, 0, 1, 0, 1 / 200)
-        fig2 = transform.rotate(fig2, 0, 0, 1, 1 / 200)
         cX1 = fig2.centro[0]
         cY1 = fig2.centro[1]
         cZ1 = fig2.centro[2]
+        fig2.setMoveX(True)
         fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
         plano.projetaPoligono(fig2, janela)
 
-        clock.tick(1)
-        pygame.display.update()
-        janela.fill((0, 0, 0, 1))
+        while(not quadrosChave.quadroChaveCentro(fig2, largura, altura)):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            #fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
+            #fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
+            #fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
+            #cX = fig1.centro[0]
+            #cY = fig1.centro[1]
+            #cZ = fig1.centro[2]
+            #fig1 = transform.reflect(fig1, True, True, False)
+            #fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
+            #plano.projetaPoligono(fig1, janela)
+
+            cX1 = fig2.centro[0]
+            cY1 = fig2.centro[1]
+            cZ1 = fig2.centro[2]
+            fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+            fig2 = transform.rotate(fig2, 1, 0, 0, 1/200)
+            fig2 = transform.rotate(fig2, 0, 1, 0, 1 / 200)
+            fig2 = transform.rotate(fig2, 0, 0, 1, 1 / 200)
+            plano.projetaPoligono(fig2, janela)
+
+            clock.tick(60)
+            pygame.display.update()
+            janela.fill((0, 0, 0, 1))
+
+        fig2.setMoveY(False)
+        fig2.setMoveX(False)
+
+        #while (not quadrosChave.quadroChaveCentro(fig2, largura, altura)):
+         #   for event in pygame.event.get():
+          #      if event.type == pygame.QUIT:
+          #          pygame.quit()
+          #          quit()
+
+
+        #fig2 = transform.shearing(fig2, 0.2, 0.2, 0.2, 1)
+
+
+
 
 main()

@@ -1,4 +1,5 @@
 import math as m
+import numpy as np
 
 centro = [0, 0, 0, 1]
 
@@ -17,6 +18,7 @@ class Poligono:
     def __init__(self, arestas, centro):
         self.vertices = Vertice
         self.arestas = Aresta(arestas)
+        self.verticeOriginal = Vertice
         self.centro = centro
         self.desX = 0
         self.desY = 0
@@ -24,17 +26,19 @@ class Poligono:
         self.inverteY = False
         self.moveX = False
         self.moveY =False
+        self.scale = 0
 
     def addVertice(self, vert):
         self.vertices = Vertice(vert)
+
+    def addVerticeO(self, vert):
+        self.verticeOriginal = Vertice(vert)
 
     def inverteSentidoX(self):
         if(self.inverteX):
             self.inverteX = False
         else:
             self.inverteX = True
-
-        print(self.inverteX)
 
     def inverteSentidoY(self):
         if(self.inverteY):
@@ -66,7 +70,7 @@ class Poligono:
     def deslocamentoY(self):
         if(self.moveY):
             if(self.inverteY):
-                self.desY += 1  
+                self.desY += 1
             else:
                 self.desY -= 1
 
@@ -99,6 +103,12 @@ class Poligono:
     def getMoveY(self):
         return self.moveY
 
+    def setScale(self, scale):
+        self.scale = scale
+
+    def getScale(self):
+        return self.scale
+
 def setCentro(pol):
     centro = [0, 0, 0, 1]
     for v in pol.vertices.pontos:
@@ -108,10 +118,15 @@ def setCentro(pol):
     centro[0] = centro[0] / len(pol.vertices.pontos)
     centro[1] = centro[1] / len(pol.vertices.pontos)
     centro[2] = centro[2] / len(pol.vertices.pontos)
-    #print("Set centro:",centro)
+
     pol.centro = centro
     return pol
 
+def get_verticesO(pol):
+    lista = []
+    for vert in pol.verticeOriginal.pontos:
+        lista.append(vert)
+    return lista
 
 def get_vertices(pol):
     lista = []
@@ -134,7 +149,7 @@ def tamanho_aresta(pol):
         tZ = pol.vertices[aresta[0]][2] - pol.vertices[aresta[1]][2]
         H = m.sqrt(tX ** 2 + tY ** 2)
         tamanho = m.sqrt(H ** 2 + tZ ** 2)
-        # print("tamanho das arestas:", round(tamanho, 0))
+
         return int(round(tamanho, 0))
 
 
@@ -161,20 +176,18 @@ def get_cubo():
     a10 = [6, 2]
     a11 = [7, 1]
 
-    # a2.imprime()
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11], [0, 0, 0, 1])
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7])
     return fig
 
 
-def imprime(figura):
-    # print("imprime figura:")
-    for v in figura.vertices.vertice:
-        print("Vertices:",v)
-    for a in figura.arestas.aresta:
-        print("Arestas:",a)
-    centro = figura.centro
-    print("Centro:", centro)
+#def imprime(figura):
+
+#    for v in figura.vertices.vertice:
+
+#    for a in figura.arestas.aresta:
+
+#    centro = figura.centro
 
 def get_zig():
     #primeira sequencia
@@ -233,4 +246,5 @@ def get_zig():
     a25 = [13, 5]
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25], [0, 0, 0, 1])
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+    fig.addVerticeO([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
     return fig
