@@ -16,10 +16,6 @@ class Camera:
 def projetaPoligono(poligono, janela):
     arestas = poligonos.get_arestas(poligono)
 
-    cX = 2
-    cY = poligono.centro[1]
-    cZ = poligono.centro[2]
-
     cos = math.cos(3.14/4)
     sin = math.sin(3.14/4)
 

@@ -26,8 +26,6 @@ def quadroChaveTransY(figura):
 def quadroChaveCentro(figura, largura, altura):
     centro = figura.getCentro()
 
-    #print("meio", largura/2)
-    #print("centro", int(centro[0]))
     if(int(centro[0]) == largura/2):
         return True
 

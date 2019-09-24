@@ -301,9 +301,11 @@ def translate(figura, x, y, z):
 
     return fig
 
-def aumentaEscala(figura, scaleVar, janela, largura, altura, tamMax):
+def aumentaEscala(figura, scaleVar, janela, largura, altura):
 
-    while (not quadrosChave.quadroChaveScaleMax(figura, tamMax)):
+    timeInicio = pygame.time.get_ticks()
+    time = pygame.time.get_ticks()
+    while (time - timeInicio < 2000):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -311,8 +313,6 @@ def aumentaEscala(figura, scaleVar, janela, largura, altura, tamMax):
                 quit()
 
         scaleVar += 0.05
-
-        #figura = poligonos.get_zig()
 
         figura = poligonos.setCentro(figura)
         figura = scale(figura, scaleVar)
@@ -324,14 +324,18 @@ def aumentaEscala(figura, scaleVar, janela, largura, altura, tamMax):
 
         plano.projetaPoligono(figura, janela)
 
+        time = pygame.time.get_ticks()
         clock.tick(60)
         pygame.display.update()
         janela.fill((0, 0, 0, 1))
 
+
     return figura
 
-def diminuiEscala(figura, scaleVar, janela, largura, altura, tamMin):
-    while (not quadrosChave.quadroChaveScaleIdeal(figura, tamMin)):
+def diminuiEscala(figura, scaleVar, janela, largura, altura):
+    timeInicio = pygame.time.get_ticks()
+    time = pygame.time.get_ticks()
+    while (time - timeInicio < 2000):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -340,20 +344,99 @@ def diminuiEscala(figura, scaleVar, janela, largura, altura, tamMin):
 
         scaleVar -= 0.05
 
-        #figura = poligonos.get_zig()
-
         figura = poligonos.setCentro(figura)
         figura = scale(figura, scaleVar)
 
         cX1 = figura.centro[0]
         cY1 = figura.centro[1]
         cZ1 = figura.centro[2]
-        figura = translate(figura, largura / 2 - cX1 , altura / 2 - cY1, -cZ1)
+        figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
 
+        plano.projetaPoligono(figura, janela)
+
+        time = pygame.time.get_ticks()
+        clock.tick(60)
+        pygame.display.update()
+        janela.fill((0, 0, 0, 1))
+
+    return figura
+
+def aumentaCisalhamento(figura, janela, x):
+
+    timeInicio = pygame.time.get_ticks()
+    time = pygame.time.get_ticks()
+
+    while (time - timeInicio < 4000):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        time = pygame.time.get_ticks()
+
+        figura = shearing(figura, 0.001, 0.001, 0.001, x)
         plano.projetaPoligono(figura, janela)
 
         clock.tick(60)
         pygame.display.update()
         janela.fill((0, 0, 0, 1))
+
+
+    return figura
+
+
+def diminuiCisalhamento(figura, janela, x):
+
+    timeInicio = pygame.time.get_ticks()
+    time = pygame.time.get_ticks()
+
+    while (time - timeInicio < 4000):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        time = pygame.time.get_ticks()
+
+        figura = shearing(figura, -0.001, -0.001, -0.001, x)
+        plano.projetaPoligono(figura, janela)
+
+        clock.tick(60)
+        pygame.display.update()
+        janela.fill((0, 0, 0, 1))
+
+    return figura
+
+
+def transladaRotacionando(figura, janela, largura, altura):
+
+    cX1 = figura.centro[0]
+    cY1 = figura.centro[1]
+    cZ1 = figura.centro[2]
+    figura.setMoveX(True)
+    figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+    plano.projetaPoligono(figura, janela)
+
+    while (not quadrosChave.quadroChaveCentro(figura, largura, altura)):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        cX1 = figura.centro[0]
+        cY1 = figura.centro[1]
+        cZ1 = figura.centro[2]
+        figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+        figura = rotate(figura, 1, 0, 0, 1 / 100)
+        figura = rotate(figura, 0, 1, 0, 1 / 100)
+        figura = rotate(figura, 0, 0, 1, 1 / 100)
+        plano.projetaPoligono(figura, janela)
+
+        clock.tick(60)
+        pygame.display.update()
+        janela.fill((0, 0, 0, 1))
+
+    figura.setMoveY(False)
+    figura.setMoveX(False)
 
     return figura

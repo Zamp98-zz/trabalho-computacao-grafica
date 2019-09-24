@@ -55,68 +55,28 @@ def main():
 
     while True:
 
-        #print(time)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-        scale = fig2.getScale()
-        print("1", scale)
-        fig2 = transform.aumentaEscala(fig2, scale, janela, largura, altura, 20)
 
         scale = fig2.getScale()
-        print("2", scale)
-        fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura, 10)
+        fig2 = transform.aumentaEscala(fig2, scale, janela, largura, altura)
 
-        cX1 = fig2.centro[0]
-        cY1 = fig2.centro[1]
-        cZ1 = fig2.centro[2]
-        fig2.setMoveX(True)
-        fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-        plano.projetaPoligono(fig2, janela)
-
-        while(not quadrosChave.quadroChaveCentro(fig2, largura, altura)):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-
-            #fig1 = transform.rotate(fig1, 1, 0, 0, 1 / 200)
-            #fig1 = transform.rotate(fig1, 0, 1, 0, 1 / 200)
-            #fig1 = transform.rotate(fig1, 0, 0, 1, 1 / 200)
-            #cX = fig1.centro[0]
-            #cY = fig1.centro[1]
-            #cZ = fig1.centro[2]
-            #fig1 = transform.reflect(fig1, True, True, False)
-            #fig1 = transform.translate(fig1, largura / 2 - cX, altura / 2 - cY, -cZ)
-            #plano.projetaPoligono(fig1, janela)
-
-            cX1 = fig2.centro[0]
-            cY1 = fig2.centro[1]
-            cZ1 = fig2.centro[2]
-            fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-            fig2 = transform.rotate(fig2, 1, 0, 0, 1/200)
-            fig2 = transform.rotate(fig2, 0, 1, 0, 1 / 200)
-            fig2 = transform.rotate(fig2, 0, 0, 1, 1 / 200)
-            plano.projetaPoligono(fig2, janela)
-
-            clock.tick(60)
-            pygame.display.update()
-            janela.fill((0, 0, 0, 1))
-
-        fig2.setMoveY(False)
-        fig2.setMoveX(False)
-
-        #while (not quadrosChave.quadroChaveCentro(fig2, largura, altura)):
-         #   for event in pygame.event.get():
-          #      if event.type == pygame.QUIT:
-          #          pygame.quit()
-          #          quit()
+        scale = fig2.getScale()
+        fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura)
 
 
-        #fig2 = transform.shearing(fig2, 0.2, 0.2, 0.2, 1)
+        fig2 = transform.transladaRotacionando(fig2, janela, largura, altura)
 
+        fig2 = transform.aumentaCisalhamento(fig2, janela, 1)
+        fig2 = transform.diminuiCisalhamento(fig2, janela, 1)
 
+        fig2 = transform.aumentaCisalhamento(fig2, janela, 2)
+        fig2 = transform.diminuiCisalhamento(fig2, janela, 2)
+
+        fig2 = transform.aumentaCisalhamento(fig2, janela, 3)
+        fig2 = transform.diminuiCisalhamento(fig2, janela, 3)
 
 
 main()
