@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9e7e2cab-149c-44fc-a489-3c71c2ecd890" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plano.py" beforeDir="false" afterPath="$PROJECT_DIR$/plano.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quadrosChave.py" beforeDir="false" afterPath="$PROJECT_DIR$/quadrosChave.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/transform.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="69" column="77" selection-start-line="69" selection-start-column="77" selection-end-line="69" selection-end-column="77" />
+            <state relative-caret-position="136">
+              <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -27,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/transform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
-              <caret line="430" column="49" lean-forward="true" selection-start-line="430" selection-start-column="49" selection-end-line="430" selection-end-column="49" />
+            <state relative-caret-position="243">
+              <caret line="438" column="26" lean-forward="true" selection-start-line="438" selection-start-column="26" selection-end-line="438" selection-end-column="26" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
                 <element signature="e#1405#2939#0" />
@@ -116,8 +113,8 @@
       <find>get_zig</find>
       <find>!</find>
       <find>scale</find>
-      <find>print</find>
       <find>init</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -132,8 +129,8 @@
         <option value="$PROJECT_DIR$/poligonos.py" />
         <option value="$PROJECT_DIR$/plano.py" />
         <option value="$PROJECT_DIR$/quadrosChave.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/transform.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -337,20 +334,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="69" column="77" selection-start-line="69" selection-start-column="77" selection-end-line="69" selection-end-column="77" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/transform.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="430" column="49" lean-forward="true" selection-start-line="430" selection-start-column="49" selection-end-line="430" selection-end-column="49" />
+        <state relative-caret-position="243">
+          <caret line="438" column="26" lean-forward="true" selection-start-line="438" selection-start-column="26" selection-end-line="438" selection-end-column="26" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
             <element signature="e#1405#2939#0" />
@@ -358,6 +345,16 @@
             <element signature="e#3772#4709#0" />
             <element signature="e#5015#6410#0" />
             <element signature="e#7370#8113#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="36" column="52" selection-start-line="36" selection-start-column="52" selection-end-line="36" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

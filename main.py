@@ -30,10 +30,12 @@ def main():
     pygame.display.init()
     size = (largura, altura)
     janela = pygame.display.set_mode(size, 0, 0, 0)
+
     pygame.display.set_caption("Computação Gráfica com um grupinho do barulho mais que bacana!!")
     pygame.display.set_caption("Ei você, vai se fudê!!")
     pygame.display.set_caption("Zamp#")
     pygame.display.set_caption("ComPutaSão Gráfica")
+    pygame.display.set_caption("CARALHOW O EULLER É FODA!!!!")
 
     background = pygame.Surface(janela.get_size(), flags=pygame.SRCALPHA)
     background = background.convert_alpha()
@@ -49,10 +51,6 @@ def main():
     scale = 10
     fig2 = transform.scale(fig2, scale)
 
-    time = 1/ pygame.time.get_ticks()
-
-
-
     while True:
 
         for event in pygame.event.get():
@@ -65,7 +63,6 @@ def main():
 
         scale = fig2.getScale()
         fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura)
-
 
         fig2 = transform.transladaRotacionando(fig2, janela, largura, altura)
 
