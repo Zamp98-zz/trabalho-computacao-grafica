@@ -66,7 +66,7 @@ def shearing(figura, x, y, z, matriz):
         S = np.array([
             [1, y, z, 0],
             [0, 1, 0, 0],
-            [x, 0, 1, 0],
+            [0, 0, 1, 0],
             [0, 0, 0, 1]
         ])
 
