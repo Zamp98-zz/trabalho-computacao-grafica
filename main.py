@@ -53,5 +53,9 @@ def main():
         fig2 = transform.diminuiCisalhamento(fig2, janela, 3)
         fig2 = transform.transladaRotacionando(fig2, janela, largura, altura)
 
+        fig2 = transform.reflect(fig2,True,False,False)
+        fig2 = transform.reflect(fig2, False, True, False)
+        fig2 = transform.reflect(fig2, False, False, True)
+
 
 main()
