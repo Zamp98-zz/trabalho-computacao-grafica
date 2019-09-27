@@ -29,11 +29,6 @@ def quadroChaveCentro(figura, largura, altura):
     if(int(centro[0]) == largura/2):
         return True
 
-    if(int(centro[0]) >= vetTrans[0][0] or centro[0] <= vetTrans[1][0]):
-        return True
-
-    if (int(centro[1]) >= vetTrans[0][1] or centro[1] <= vetTrans[1][1]):
-        return True
 
     return False
 
