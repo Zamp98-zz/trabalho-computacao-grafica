@@ -87,7 +87,7 @@ def shearing(figura, x, y, z, matriz):
 
     R = np.dot(B, S)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(R)
     fig = poligonos.setCentro(fig)
     fig.setDeslocamentoX(figura.getDeslocamentoX())
@@ -134,17 +134,17 @@ def rotate(figura, x, y, z, fator):
     B = np.array(temp)
     if (x == 1):
         C = np.dot(B, Rx)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
     elif (y == 1):
         C = np.dot(B, Ry)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
     elif (z == 1):
         C = np.dot(B, Rz)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
 
@@ -188,7 +188,7 @@ def scale(figura, fator):
 
     C = transladaParaOrigem(C, False, centro)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(C)
     fig = poligonos.setCentro(fig)
     fig.setDeslocamentoX(figura.getDeslocamentoX())
@@ -231,7 +231,7 @@ def reflect(figura, qx, qy, qz):
 
     C = np.dot(B, A)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(C)
     fig.addVerticeO(C)
     fig = poligonos.setCentro(fig)
@@ -286,7 +286,7 @@ def translate(figura, x, y, z):
             linha.append(j[0])
 
         C.append(linha)
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
 
     fig.addVertice(C)
     fig.addVerticeO(C)
