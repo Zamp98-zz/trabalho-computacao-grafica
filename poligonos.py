@@ -3,6 +3,10 @@ import numpy as np
 
 centro = [0, 0, 0, 1]
 
+class Face:
+    def __init__(self, vertices, cor):
+        self.vertices = vertices
+        self.cor = cor
 
 class Aresta:
     def __init__(self, aresta):
@@ -15,7 +19,7 @@ class Vertice:
             self.pontos.append(vertice)
 
 class Poligono:
-    def __init__(self, arestas, centro):
+    def __init__(self, arestas, centro, faces):
         self.vertices = Vertice
         self.arestas = Aresta(arestas)
         self.verticeOriginal = Vertice
@@ -25,8 +29,9 @@ class Poligono:
         self.inverteX = False
         self.inverteY = False
         self.moveX = False
-        self.moveY =False
+        self.moveY = False
         self.scale = 0
+        self.faces = faces
 
     def addVertice(self, vert):
         self.vertices = Vertice(vert)
@@ -109,6 +114,9 @@ class Poligono:
     def getScale(self):
         return self.scale
 
+    def setFaces(self, faces):
+        self.faces = faces
+
 def setCentro(pol):
     centro = [0, 0, 0, 1]
     for v in pol.vertices.pontos:
@@ -134,13 +142,17 @@ def get_vertices(pol):
         lista.append(vert)
     return lista
 
-
 def get_arestas(pol):
     lista = []
     for ar in pol.arestas.aresta:
         lista.append(ar)
     return lista
 
+def get_faces(pol):
+    lista = []
+    for f in pol.faces:
+        lista.append(f)
+    return lista
 
 def tamanho_aresta(pol):
     for aresta in pol.arestas:
@@ -151,7 +163,6 @@ def tamanho_aresta(pol):
         tamanho = m.sqrt(H ** 2 + tZ ** 2)
 
         return int(round(tamanho, 0))
-
 
 def get_cubo():
     v0 = [0, 0, 0, 1]
@@ -179,15 +190,6 @@ def get_cubo():
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11], [0, 0, 0, 1])
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7])
     return fig
-
-
-#def imprime(figura):
-
-#    for v in figura.vertices.vertice:
-
-#    for a in figura.arestas.aresta:
-
-#    centro = figura.centro
 
 def get_zig():
     #primeira sequencia
@@ -240,11 +242,50 @@ def get_zig():
     a19 = [14, 15]
     a20 = [15, 7]
     a21 = [15, 8]
+    #dobradiças da segunda parte
     a22 = [9, 14]
     a23 = [10, 13]
+
     a24 = [10, 2]
     a25 = [13, 5]
-    fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25], [0, 0, 0, 1])
+    #Faces do poligono. Tem que ser dessa forma pra nao dar merda
+
+    f0 = [0, 1, 9, 8]
+    f1 = [1, 2, 10, 9]
+    f2 = [2, 3, 11, 10]
+    f3 = [15, 14, 9, 8]
+    f4 = [9, 14, 13, 10]
+    f5 = [13, 12, 11, 10]
+    f6 = [0, 7, 6, 1]
+    f7 = [6, 5, 2, 1]
+    f8 = [5, 4, 3, 2]
+    f9 = [3, 4, 12, 11]
+    f10 = [0, 7, 15, 8]
+    f11 = [6, 14, 15, 7]
+    f12 = [6, 5, 13, 14]
+    f13 = [4, 12, 13, 5]
+
+
+
+    """f0 = [0, 7, 6, 1]
+    f1 = [0, 7, 15, 8]
+    f2 = [0, 1, 9, 8]
+    f3 = [8, 15, 14, 9]
+    f4 = [7, 6, 14, 15]
+    f5 = [1, 6, 5, 2]
+    f6 = [1, 2, 10, 9]
+    f7 = [6, 5, 13, 14]
+    f8 = [9, 14, 13, 10]
+    f9 = [2, 5, 4, 3]
+    f10 = [2, 3, 11, 10]
+    f11 = [5, 4, 12, 13]
+    f12 = [10, 13, 12, 11]
+    f13 = [3, 4, 12, 11]"""
+
+    fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23],
+                   [0, 0, 0, 1],
+                   [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13])
+
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
-    fig.addVerticeO([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
     return fig

@@ -87,7 +87,7 @@ def shearing(figura, x, y, z, matriz):
 
     R = np.dot(B, S)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(R)
     fig = poligonos.setCentro(fig)
     fig.setDeslocamentoX(figura.getDeslocamentoX())
@@ -134,17 +134,17 @@ def rotate(figura, x, y, z, fator):
     B = np.array(temp)
     if (x == 1):
         C = np.dot(B, Rx)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
     elif (y == 1):
         C = np.dot(B, Ry)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
     elif (z == 1):
         C = np.dot(B, Rz)
-        figura = poligonos.Poligono(arestas, figura.centro)
+        figura = poligonos.Poligono(arestas, figura.centro, figura.faces)
         figura.addVertice(C)
         figura.addVerticeO(C)
 
@@ -188,7 +188,7 @@ def scale(figura, fator):
 
     C = transladaParaOrigem(C, False, centro)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(C)
     fig = poligonos.setCentro(fig)
     fig.setDeslocamentoX(figura.getDeslocamentoX())
@@ -231,7 +231,7 @@ def reflect(figura, qx, qy, qz):
 
     C = np.dot(B, A)
 
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
     fig.addVertice(C)
     fig.addVerticeO(C)
     fig = poligonos.setCentro(fig)
@@ -286,7 +286,7 @@ def translate(figura, x, y, z):
             linha.append(j[0])
 
         C.append(linha)
-    fig = poligonos.Poligono(arestas, figura.centro)
+    fig = poligonos.Poligono(arestas, figura.centro, figura.faces)
 
     fig.addVertice(C)
     fig.addVerticeO(C)
@@ -322,7 +322,7 @@ def aumentaEscala(figura, scaleVar, janela, largura, altura):
         cZ1 = figura.centro[2]
         figura = translate(figura, largura / 2 - cX1 , altura / 2 - cY1 , -cZ1)
 
-        plano.projetaPoligono(figura, janela)
+        plano.projetaPoligonoFaces(figura, janela)
 
         time = pygame.time.get_ticks()
         clock.tick(60)
@@ -352,7 +352,7 @@ def diminuiEscala(figura, scaleVar, janela, largura, altura):
         cZ1 = figura.centro[2]
         figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
 
-        plano.projetaPoligono(figura, janela)
+        plano.projetaPoligonoFaces(figura, janela)
 
         time = pygame.time.get_ticks()
         clock.tick(60)
@@ -375,7 +375,7 @@ def aumentaCisalhamento(figura, janela, x):
         time = pygame.time.get_ticks()
 
         figura = shearing(figura, 0.001, 0.001, 0.001, x)
-        plano.projetaPoligono(figura, janela)
+        plano.projetaPoligonoWireframe(figura, janela)
 
         clock.tick(60)
         pygame.display.update()
@@ -399,7 +399,7 @@ def diminuiCisalhamento(figura, janela, x):
         time = pygame.time.get_ticks()
 
         figura = shearing(figura, -0.001, -0.001, -0.001, x)
-        plano.projetaPoligono(figura, janela)
+        plano.projetaPoligonoWireframe(figura, janela)
 
         clock.tick(60)
         pygame.display.update()
@@ -415,7 +415,7 @@ def transladaRotacionando(figura, janela, largura, altura):
     cZ1 = figura.centro[2]
     figura.setMoveX(True)
     figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-    plano.projetaPoligono(figura, janela)
+    plano.projetaPoligonoWireframe(figura, janela)
 
     while (not quadrosChave.quadroChaveCentro(figura, largura, altura)):
         for event in pygame.event.get():
@@ -430,7 +430,7 @@ def transladaRotacionando(figura, janela, largura, altura):
         figura = rotate(figura, 1, 0, 0, 1 / 100)
         figura = rotate(figura, 0, 1, 0, 1 / 100)
         figura = rotate(figura, 0, 0, 1, 1 / 100)
-        plano.projetaPoligono(figura, janela)
+        plano.projetaPoligonoWireframe(figura, janela)
 
         clock.tick(60)
         pygame.display.update()

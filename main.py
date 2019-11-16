@@ -48,7 +48,7 @@ def main():
             fig2 = transform.reflect(fig2, False, True, False)
             timeInicio = pygame.time.get_ticks()
             time = 0
-            plano.projetaPoligono(fig2, janela)
+            plano.projetaPoligonoWireframe(fig2, janela)
             while (time - timeInicio < 800):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -59,7 +59,7 @@ def main():
                 cY1 = fig2.centro[1]
                 cZ1 = fig2.centro[2]
                 fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligono(fig2, janela)
+                plano.projetaPoligonoWireframe(fig2, janela)
 
                 time = pygame.time.get_ticks()
                 clock.tick(60)
@@ -69,7 +69,7 @@ def main():
             fig2 = transform.reflect(fig2, True, False, False)
             timeInicio = pygame.time.get_ticks()
             time = 0
-            plano.projetaPoligono(fig2, janela)
+            plano.projetaPoligonoWireframe(fig2, janela)
             while (time - timeInicio < 800):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -80,7 +80,7 @@ def main():
                 cY1 = fig2.centro[1]
                 cZ1 = fig2.centro[2]
                 fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligono(fig2, janela)
+                plano.projetaPoligonoWireframe(fig2, janela)
 
                 time = pygame.time.get_ticks()
                 clock.tick(60)
@@ -90,7 +90,7 @@ def main():
             fig2 = transform.reflect(fig2, False, False, True)
             timeInicio = pygame.time.get_ticks()
             time = 0
-            plano.projetaPoligono(fig2, janela)
+            plano.projetaPoligonoWireframe(fig2, janela)
             while (time - timeInicio < 800):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -101,7 +101,7 @@ def main():
                 cY1 = fig2.centro[1]
                 cZ1 = fig2.centro[2]
                 fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligono(fig2, janela)
+                plano.projetaPoligonoWireframe(fig2, janela)
 
                 time = pygame.time.get_ticks()
                 clock.tick(60)

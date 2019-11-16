@@ -1,7 +1,7 @@
 from poligonos import get_vertices
 
 vetTrans = [[900, 500, 0],
-            [50, 50, 0]]
+            [100, 50, 0]]
 
 def quadroChaveTransX(figura):
     centro = figura.getCentro()
