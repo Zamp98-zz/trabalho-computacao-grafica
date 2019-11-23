@@ -287,5 +287,161 @@ def get_zig():
                    [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13])
 
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
-    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+    #fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
     return fig
+
+#código babaca fodase
+def calcula_figura_curva(fig):
+    vertices = get_vertices(fig)
+    gcp0 = []
+    j = 12
+    while(j < 16):
+        gcp0.append(vertices[j])
+        j+=1
+    gcp1 = []
+    j = 0
+    while (j < 4):
+        gcp1.append(vertices[j])
+        j += 1
+    gcp2 = []
+    j = 8
+    while (j < 12):
+        gcp2.append(vertices[j])
+        j += 1
+    gcp3 = []
+    j = 4
+    while (j < 8):
+        gcp3.append(vertices[j])
+        j += 1
+    #lista de vertices
+    verticesC0 = calcula_pontos_bezier(gcp0, None)
+    verticesC1 = calcula_pontos_bezier(gcp1, None)
+    verticesC2 = calcula_pontos_bezier(gcp2, None)
+    verticesC3 = calcula_pontos_bezier(gcp3, None)
+    l0=[]
+    #listas de arestas
+    for i in range(1,len(verticesC0)):
+        l0.append([i-1, i])
+    l1=[]
+    for i in range(1,len(verticesC1)):
+        l1.append([i-1+len(verticesC0),i+len(verticesC0)])
+    l2=[]
+    for i in range(1,len(verticesC2)):
+        l2.append([i-1+len(verticesC0)+len(verticesC1), i+len(verticesC0)+len(verticesC1)])
+    l3=[]
+    for i in range(1,len(verticesC3)):
+        l3.append([i-1+len(verticesC0)+len(verticesC1)+len(verticesC2), i+len(verticesC0)+len(verticesC1)+len(verticesC2)])
+    arestas = []
+
+    for i in l0:
+        arestas.append(i)
+    for i in l1:
+        arestas.append(i)
+    for i in l2:
+        arestas.append(i)
+    for i in l3:
+        arestas.append(i)
+    arestas.append([0, len(verticesC0)+len(verticesC1)+len(verticesC2)])
+    arestas.append([0, len(verticesC0)+len(verticesC1)+len(verticesC2)-1])
+
+    arestas.append([len(verticesC0), len(verticesC0) + len(verticesC1)])
+    arestas.append([len(verticesC0), len(verticesC0) + len(verticesC1) + len(verticesC2) + len(verticesC3) - 1])
+
+    arestas.append([len(verticesC0)+len(verticesC1)-1, len(verticesC0) + len(verticesC1) + len(verticesC2)])
+    arestas.append([len(verticesC0) - 1, len(verticesC0) + len(verticesC1) + len(verticesC2)+len(verticesC3)-1])
+
+    arestas.append([len(verticesC0) + len(verticesC1) - 1, len(verticesC0) + len(verticesC1) + len(verticesC2)-1])
+    arestas.append([len(verticesC0) - 1, len(verticesC0)+len(verticesC1)])
+
+    verticesFinal = []
+
+    for i in verticesC0:
+        verticesFinal.append(i)
+    for i in verticesC1:
+        verticesFinal.append(i)
+    for i in verticesC2:
+        verticesFinal.append(i)
+    for i in verticesC3:
+        verticesFinal.append(i)
+    figura = Poligono(arestas, fig.centro, fig.faces)
+    figura.addVertice(verticesFinal)
+    figura.scale = fig.getScale()
+
+    return figura
+
+def calcula_pontos_bezier(vertices, numPoints=None):
+    if numPoints is None:
+        numPoints = 30
+    if numPoints < 2 or len(vertices) != 4:
+        return None
+
+    result = []
+
+    b0x = vertices[0][0]
+    b0y = vertices[0][1]
+    b0z = vertices[0][2]
+    b1x = vertices[1][0]
+    b1y = vertices[1][1]
+    b1z = vertices[1][2]
+    b2x = vertices[2][0]
+    b2y = vertices[2][1]
+    b2z = vertices[2][2]
+    b3x = vertices[3][0]
+    b3y = vertices[3][1]
+    b3z = vertices[3][2]
+
+    # Compute polynomial coefficients from Bezier points
+    ax = -b0x + 3 * b1x + -3 * b2x + b3x
+    ay = -b0y + 3 * b1y + -3 * b2y + b3y
+    az = -b0z + 3 * b1z + -3 * b2z + b3z
+
+    bx = 3 * b0x + -6 * b1x + 3 * b2x
+    by = 3 * b0y + -6 * b1y + 3 * b2y
+    bz = 3 * b0z + -6 * b1z + 3 * b2z
+    cx = -3 * b0x + 3 * b1x
+    cy = -3 * b0y + 3 * b1y
+    cz = -3 * b0z + 3 * b1z
+
+    dx = b0x
+    dy = b0y
+    dz = b0z
+
+    # Set up the number of steps and step size
+    numSteps = numPoints - 1  # arbitrary choice
+    h = 1.0 / numSteps  # compute our step size
+
+    # Compute forward differences from Bezier points and "h"
+    pointX = dx
+    pointY = dy
+    pointZ = dz
+    firstFDX = ax * (h * h * h) + bx * (h * h) + cx * h
+    firstFDY = ay * (h * h * h) + by * (h * h) + cy * h
+    firstFDZ = az * (h * h * h) + bz * (h * h) + cz * h
+
+    secondFDX = 6 * ax * (h * h * h) + 2 * bx * (h * h)
+    secondFDY = 6 * ay * (h * h * h) + 2 * by * (h * h)
+    secondFDZ = 6 * az * (h * h * h) + 2 * bz * (h * h)
+
+    thirdFDX = 6 * ax * (h * h * h)
+    thirdFDY = 6 * ay * (h * h * h)
+    thirdFDZ = 6 * az * (h * h * h)
+
+    # Compute points at each step
+    result.append([int(pointX), int(pointY), int(pointZ), 1])
+
+    for i in range(numSteps):
+        pointX += firstFDX
+        pointY += firstFDY
+        pointZ += firstFDZ
+
+        firstFDX += secondFDX
+        firstFDY += secondFDY
+        firstFDZ += secondFDZ
+
+        secondFDX += thirdFDX
+        secondFDY += thirdFDY
+        secondFDZ +=thirdFDZ
+
+        result.append([int(pointX), int(pointY), int(pointZ),1])
+
+    return result

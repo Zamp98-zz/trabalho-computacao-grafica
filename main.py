@@ -30,7 +30,6 @@ def main():
     scale = 10
     fig2 = transform.scale(fig2, scale)
 
-    inicio = True
     while True:
 
         for event in pygame.event.get():
@@ -43,70 +42,71 @@ def main():
         scale = fig2.getScale()
         fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura) #Função para reduzir escala
 
-        #Só faz essa animação no inicio
-        if(inicio == True):
-            fig2 = transform.reflect(fig2, False, True, False)
-            timeInicio = pygame.time.get_ticks()
-            time = 0
-            plano.projetaPoligonoWireframe(fig2, janela)
-            while (time - timeInicio < 800):
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
 
-                cX1 = fig2.centro[0]
-                cY1 = fig2.centro[1]
-                cZ1 = fig2.centro[2]
-                fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligonoWireframe(fig2, janela)
+        fig3 = poligonos.calcula_figura_curva(fig2)
+        fig3 = poligonos.setCentro(fig3)
+        fig3 = transform.reflect(fig3, False, True, False)
+        timeInicio = pygame.time.get_ticks()
+        time = 0
+        plano.projetaPoligonoWireframe(fig3, janela)
+        while (time - timeInicio < 800):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
 
-                time = pygame.time.get_ticks()
-                clock.tick(60)
-                pygame.display.update()
-                janela.fill((0, 0, 0, 1))
+            cX1 = fig3.centro[0]
+            cY1 = fig3.centro[1]
+            cZ1 = fig3.centro[2]
+            fig3 = transform.translate(fig3, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
 
-            fig2 = transform.reflect(fig2, True, False, False)
-            timeInicio = pygame.time.get_ticks()
-            time = 0
-            plano.projetaPoligonoWireframe(fig2, janela)
-            while (time - timeInicio < 800):
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
+            plano.projetaPoligonoWireframe(fig3, janela)
+            time = pygame.time.get_ticks()
+            clock.tick(60)
+            pygame.display.update()
+            janela.fill((0, 0, 0, 1))
 
-                cX1 = fig2.centro[0]
-                cY1 = fig2.centro[1]
-                cZ1 = fig2.centro[2]
-                fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligonoWireframe(fig2, janela)
+        fig3 = transform.reflect(fig3, True, False, False)
+        timeInicio = pygame.time.get_ticks()
+        time = 0
+        plano.projetaPoligonoWireframe(fig3, janela)
+        while (time - timeInicio < 800):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
 
-                time = pygame.time.get_ticks()
-                clock.tick(60)
-                pygame.display.update()
-                janela.fill((0, 0, 0, 1))
+            cX1 = fig3.centro[0]
+            cY1 = fig3.centro[1]
+            cZ1 = fig3.centro[2]
+            fig3 = transform.translate(fig3, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+            plano.projetaPoligonoWireframe(fig3, janela)
 
-            fig2 = transform.reflect(fig2, False, False, True)
-            timeInicio = pygame.time.get_ticks()
-            time = 0
-            plano.projetaPoligonoWireframe(fig2, janela)
-            while (time - timeInicio < 800):
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
+            time = pygame.time.get_ticks()
+            clock.tick(60)
+            pygame.display.update()
+            janela.fill((0, 0, 0, 1))
 
-                cX1 = fig2.centro[0]
-                cY1 = fig2.centro[1]
-                cZ1 = fig2.centro[2]
-                fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligonoWireframe(fig2, janela)
+        fig3 = transform.reflect(fig3, False, False, True)
+        timeInicio = pygame.time.get_ticks()
+        time = 0
+        plano.projetaPoligonoWireframe(fig3, janela)
+        while (time - timeInicio < 800):
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
 
-                time = pygame.time.get_ticks()
-                clock.tick(60)
-                pygame.display.update()
-                janela.fill((0, 0, 0, 1))
+            cX1 = fig3.centro[0]
+            cY1 = fig3.centro[1]
+            cZ1 = fig3.centro[2]
+            fig3 = transform.translate(fig3, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+            plano.projetaPoligonoWireframe(fig3, janela)
+
+            time = pygame.time.get_ticks()
+            clock.tick(60)
+            pygame.display.update()
+            janela.fill((0, 0, 0, 1))
 
         fig2 = transform.transladaRotacionando(fig2, janela, largura, altura) #Função para mover e rotacionar a figura
 
