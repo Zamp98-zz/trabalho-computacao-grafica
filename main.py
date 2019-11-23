@@ -29,7 +29,8 @@ def main():
     fig2 = poligonos.setCentro(fig2)
     scale = 10
     fig2 = transform.scale(fig2, scale)
-
+    fig3 = poligonos.calcula_figura_curva(fig2)
+    fig3 = poligonos.setCentro(fig3)
     inicio = True
     while True:
 
@@ -43,12 +44,16 @@ def main():
         scale = fig2.getScale()
         fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura) #Função para reduzir escala
 
+        scale = fig3.getScale()
+        fig2 = transform.aumentaEscala(fig3, scale, janela, largura, altura) #Função para aumentar escala
+
         #Só faz essa animação no inicio
         if(inicio == True):
             fig2 = transform.reflect(fig2, False, True, False)
             timeInicio = pygame.time.get_ticks()
             time = 0
             plano.projetaPoligonoWireframe(fig2, janela)
+            plano.projetaPoligonoWireframe(fig3, janela)
             while (time - timeInicio < 800):
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -59,8 +64,9 @@ def main():
                 cY1 = fig2.centro[1]
                 cZ1 = fig2.centro[2]
                 fig2 = transform.translate(fig2, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
-                plano.projetaPoligonoWireframe(fig2, janela)
 
+                plano.projetaPoligonoWireframe(fig2, janela)
+                plano.projetaPoligonoWireframe(fig3, janela)
                 time = pygame.time.get_ticks()
                 clock.tick(60)
                 pygame.display.update()
