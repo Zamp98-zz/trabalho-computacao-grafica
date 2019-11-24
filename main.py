@@ -43,13 +43,13 @@ def main():
         fig2 = transform.diminuiEscala(fig2, scale, janela, largura, altura) #Função para reduzir escala
 
 
-        fig3 = poligonos.calcula_figura_curva(fig2)
+        fig3 = poligonos.calcula_figura_curva(fig2) #Cria uma figura com curvas
         fig3 = poligonos.setCentro(fig3)
-        fig3 = transform.reflect(fig3, False, True, False)
+        fig3 = transform.reflect(fig3, False, True, False) #Faz a figura refletir no eixo Y
         timeInicio = pygame.time.get_ticks()
         time = 0
         plano.projetaPoligonoWireframe(fig3, janela)
-        while (time - timeInicio < 800):
+        while (time - timeInicio < 800): #Exibe a imagem da figura refletida por um tempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -66,11 +66,11 @@ def main():
             pygame.display.update()
             janela.fill((0, 0, 0, 1))
 
-        fig3 = transform.reflect(fig3, True, False, False)
+        fig3 = transform.reflect(fig3, True, False, False)#Faz a figura refletir no eixo X
         timeInicio = pygame.time.get_ticks()
         time = 0
         plano.projetaPoligonoWireframe(fig3, janela)
-        while (time - timeInicio < 800):
+        while (time - timeInicio < 800):#Exibe a imagem da figura refletida por um tempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -87,11 +87,11 @@ def main():
             pygame.display.update()
             janela.fill((0, 0, 0, 1))
 
-        fig3 = transform.reflect(fig3, False, False, True)
+        fig3 = transform.reflect(fig3, False, False, True)#Faz a figura refletir no eixo Z
         timeInicio = pygame.time.get_ticks()
         time = 0
         plano.projetaPoligonoWireframe(fig3, janela)
-        while (time - timeInicio < 800):
+        while (time - timeInicio < 800):#Exibe a imagem da figura refletida por um tempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
