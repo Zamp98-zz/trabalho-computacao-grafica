@@ -5,9 +5,10 @@ centro = [0, 0, 0, 1]
 
 class Face:
     def __init__(self, vertices, cor):
-        self.vertices = vertices
+        self.pontos = []
+        for face in vertices:
+            self.pontos.append(face)
         self.cor = cor
-
 
 class Aresta:
     def __init__(self, aresta):
@@ -32,7 +33,10 @@ class Poligono:
         self.moveX = False
         self.moveY = False
         self.scale = 0
-        self.faces = faces
+        self.faces = Face(faces, None)
+
+    def addFaces(self, faces, cor):
+        self.faces = Face(faces, cor)
 
     def addVertice(self, vert):
         self.vertices = Vertice(vert)
@@ -151,8 +155,8 @@ def get_arestas(pol):
 
 def get_faces(pol):
     lista = []
-    for f in pol.faces:
-        lista.append(f)
+    for face in pol.faces.pontos:
+        lista.append(face)
     return lista
 
 def tamanho_aresta(pol):
@@ -164,33 +168,6 @@ def tamanho_aresta(pol):
         tamanho = m.sqrt(H ** 2 + tZ ** 2)
 
         return int(round(tamanho, 0))
-
-def get_cubo():
-    v0 = [0, 0, 0, 1]
-    v1 = [0, 200, 0, 1]
-    v2 = [200, 200, 0, 1]
-    v3 = [200, 0, 0, 1]
-    v4 = [0, 0, 200, 1]
-    v5 = [200, 0, 200, 1]
-    v6 = [200, 200, 200, 1]
-    v7 = [0, 200, 200, 1]
-
-    a0 = [0, 1]
-    a1 = [0, 3]
-    a2 = [1, 2]
-    a3 = [2, 3]
-    a4 = [4, 5]
-    a5 = [4, 7]
-    a6 = [4, 0]
-    a7 = [5, 3]
-    a8 = [5, 6]
-    a9 = [6, 7]
-    a10 = [6, 2]
-    a11 = [7, 1]
-
-    fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11], [0, 0, 0, 1])
-    fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7])
-    return fig
 
 def get_zig():
     #primeira sequencia
@@ -215,7 +192,6 @@ def get_zig():
     v13 = [3, 8, 3, 1]
     v14 = [6, 4, 3, 1]
     v15 = [3, 0, 3, 1]
-
 
     #g1
     a0 = [0, 1]
@@ -247,51 +223,30 @@ def get_zig():
     a22 = [9, 14]
     a23 = [10, 13]
 
-    a24 = [10, 2]
-    a25 = [13, 5]
     #Faces do poligono. Tem que ser dessa forma pra nao dar merda
-
-    f0 = [0, 1, 9, 8]
-    f1 = [1, 2, 10, 9]
-    f2 = [2, 3, 11, 10]
-    f3 = [15, 14, 9, 8]
-    f4 = [9, 14, 13, 10]
-    f5 = [13, 12, 11, 10]
-    f6 = [0, 7, 6, 1]
-    f7 = [6, 5, 2, 1]
-    f8 = [5, 4, 3, 2]
-    f9 = [3, 4, 12, 11]
-    f10 = [0, 7, 15, 8]
-    f11 = [6, 14, 15, 7]
+    f0 = [12, 4, 3, 11]
+    f1 = [1, 9, 8, 0]
+    f2 = [2, 10, 9, 1]
+    f3 = [3, 11, 10, 2]
+    f4 = [15, 14, 9, 8]
+    f5 = [14, 13, 10, 9]
+    f6 = [13, 12, 11, 10]
+    f7 = [7, 6, 1, 0]
+    f8 = [6, 5, 2, 1]
+    f9 = [5, 4, 3, 2]
+    f10 = [15, 7, 0, 8]
+    f11 = [15, 7, 6, 14]
     f12 = [6, 5, 13, 14]
-    f13 = [4, 12, 13, 5]
-
-
-
-    """f0 = [0, 7, 6, 1]
-    f1 = [0, 7, 15, 8]
-    f2 = [0, 1, 9, 8]
-    f3 = [8, 15, 14, 9]
-    f4 = [7, 6, 14, 15]
-    f5 = [1, 6, 5, 2]
-    f6 = [1, 2, 10, 9]
-    f7 = [6, 5, 13, 14]
-    f8 = [9, 14, 13, 10]
-    f9 = [2, 5, 4, 3]
-    f10 = [2, 3, 11, 10]
-    f11 = [5, 4, 12, 13]
-    f12 = [10, 13, 12, 11]
-    f13 = [3, 4, 12, 11]"""
+    f13 = [5, 4, 12, 13]
 
     fig = Poligono([a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23],
                    [0, 0, 0, 1],
                    [f0, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13])
 
     fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
-    #fig.addVertice([v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15])
+
     return fig
 
-#código babaca fodase
 def calcula_figura_curva(fig):
     vertices = get_vertices(fig)
     gcp0 = []
@@ -364,7 +319,7 @@ def calcula_figura_curva(fig):
         verticesFinal.append(i)
     for i in verticesC3:
         verticesFinal.append(i)
-    figura = Poligono(arestas, fig.centro, fig.faces)
+    figura = Poligono(arestas, fig.centro, get_faces(fig))
     figura.addVertice(verticesFinal)
     figura.scale = fig.getScale()
 

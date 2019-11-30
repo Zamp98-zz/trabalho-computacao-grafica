@@ -1,5 +1,3 @@
-from poligonos import get_vertices
-
 vetTrans = [[900, 500, 0],
             [100, 50, 0]]
 
