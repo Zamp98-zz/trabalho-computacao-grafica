@@ -8,6 +8,7 @@ class Face:
         self.vertices = vertices
         self.cor = cor
 
+
 class Aresta:
     def __init__(self, aresta):
         self.aresta = aresta
