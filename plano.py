@@ -38,7 +38,7 @@ def projetaPoligonoWireframe(poligono, janela):
             R[i][j] = R[i][j] / R[i][len(R[i])-1]
 
     for i in range(len(arestas)):
-        pygame.draw.aaline(janela, (255, 255, 255),
+        pygame.draw.line(janela, (255, 255, 255),
                          (R[arestas[i][0]][0], R[arestas[i][0]][1]),
                          (R[arestas[i][1]][0], R[arestas[i][1]][1]), 1)
 
@@ -109,9 +109,15 @@ def projetaPoligonoFaces(poligono, janela):
         vet03.append(vertices[i[2]][2])
 
         vet = []
-        vet.append(vet01)
-        vet.append(vet02)
-        vet.append(vet03)
+        # vet.append(np.subtract(vet02, vet01))
+        vet.append([vet02[0] - vet01[0], vet02[1] - vet01[1], vet02[2] - vet01[2]])
+        # vet.append(np.subtract(vet03, vet01))
+        vet.append([vet03[0] - vet01[0], vet03[1] - vet01[1], vet03[2] - vet01[2]])
+        # vet.append(vet03)
+        #vet.append(vet01)
+        #vet.append(vet02)
+        #vet.append(vet03)
+        #print("VET:", vet)
 
         vetores.append(vet)# Pega os vetores ignorando a dimensão W
 
@@ -123,7 +129,7 @@ def projetaPoligonoFaces(poligono, janela):
         normalTemp = np.cross(vetores[i][0], vetores[i][1])#Calcula a normal das faces
         normal.append(normalTemp)
 
-    vetorluz = unit_vector([2, 5, 7])#Vetor que diz a direção da luz
+    vetorluz = unit_vector([0, 1, 1])#Vetor que diz a direção da luz
 
     angulo = []
     for i in range(len(normal)):
@@ -133,12 +139,11 @@ def projetaPoligonoFaces(poligono, janela):
     i = 0
     for face in res:
 
-        print(angulo[i])
+        print("face ",i,angulo[i])
 
-        if(angulo[i] <= 90):
-            cor = [168 - angulo[i], 168 - angulo[i], 168 - angulo[i]]
-            pygame.draw.polygon(janela, cor, face)
 
+        cor = [168 - angulo[i], 168 - angulo[i], 168 - angulo[i]]
+        pygame.draw.polygon(janela, cor, face)
 
 
         i += 1
