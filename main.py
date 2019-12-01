@@ -16,10 +16,6 @@ def main():
     janela = pygame.display.set_mode(size, 0, 0, 0)
 
     pygame.display.set_caption("Computação Gráfica com um grupinho do barulho mais que bacana!!")
-    pygame.display.set_caption("Ei você, vai se fudê!!")
-    pygame.display.set_caption("Zamp#")
-    pygame.display.set_caption("ComPutaSão Gráfica")
-    pygame.display.set_caption("CARALHOW O EULLER É FODA!!!!")
 
     background = pygame.Surface(janela.get_size(), flags=pygame.SRCALPHA)
     background = background.convert_alpha()
