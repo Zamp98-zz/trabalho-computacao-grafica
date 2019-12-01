@@ -16,6 +16,10 @@ def main():
     janela = pygame.display.set_mode(size, 0, 0, 0)
 
     pygame.display.set_caption("Computação Gráfica com um grupinho do barulho mais que bacana!!")
+    pygame.display.set_caption("Ei você, vai se fudê!!")
+    pygame.display.set_caption("Zamp#")
+    pygame.display.set_caption("ComPutaSão Gráfica")
+    pygame.display.set_caption("CARALHOW O EULLER É FODA!!!!")
 
     background = pygame.Surface(janela.get_size(), flags=pygame.SRCALPHA)
     background = background.convert_alpha()
@@ -40,11 +44,20 @@ def main():
 
 
         fig3 = poligonos.calcula_figura_curva(fig2) #Cria uma figura com curvas
-        fig3 = poligonos.setCentro(fig3)
+        #fig3 = poligonos.setCentro(fig3)
         fig3 = transform.reflect(fig3, False, True, False) #Faz a figura refletir no eixo Y
         timeInicio = pygame.time.get_ticks()
-        time = 0
+        fig3.setDeslocamentoX(fig2.getDeslocamentoX())
+        fig3.setDeslocamentoY(fig2.getDeslocamentoY())
+        fig3.setSentidoX(fig2.getSentidoX())
+        fig3.setSentidoY(fig2.getSentidoY())
+        fig3.setMoveX(fig2.getMoveX())
+        fig3.setMoveY(fig2.getMoveY())
+        fig3.setScale(fig2.getScale())
+        
+        #fig3 = transform.translate(fig3, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
         plano.projetaPoligonoWireframe(fig3, janela)
+        time = 0
         while (time - timeInicio < 800): #Exibe a imagem da figura refletida por um tempo
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -116,6 +129,5 @@ def main():
         fig2 = transform.diminuiCisalhamento(fig2, janela, 3) #Função para diminuir o cisalhamento no eixo xz
         fig2 = transform.transladaRotacionando(fig2, janela, largura, altura)
 
-        inicio = False
 
 main()

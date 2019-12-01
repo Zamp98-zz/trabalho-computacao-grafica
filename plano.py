@@ -109,15 +109,9 @@ def projetaPoligonoFaces(poligono, janela):
         vet03.append(vertices[i[2]][2])
 
         vet = []
-        # vet.append(np.subtract(vet02, vet01))
         vet.append([vet02[0] - vet01[0], vet02[1] - vet01[1], vet02[2] - vet01[2]])
-        # vet.append(np.subtract(vet03, vet01))
         vet.append([vet03[0] - vet01[0], vet03[1] - vet01[1], vet03[2] - vet01[2]])
-        # vet.append(vet03)
-        #vet.append(vet01)
-        #vet.append(vet02)
-        #vet.append(vet03)
-        #print("VET:", vet)
+
 
         vetores.append(vet)# Pega os vetores ignorando a dimensão W
 
@@ -139,12 +133,8 @@ def projetaPoligonoFaces(poligono, janela):
     i = 0
     for face in res:
 
-        print("face ",i,angulo[i])
-
-
         cor = [168 - angulo[i], 168 - angulo[i], 168 - angulo[i]]
         pygame.draw.polygon(janela, cor, face)
 
 
         i += 1
-

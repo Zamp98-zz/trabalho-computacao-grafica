@@ -414,7 +414,7 @@ def transladaRotacionando(figura, janela, largura, altura):
     cY1 = figura.centro[1]
     cZ1 = figura.centro[2]
     figura.setMoveX(True)
-    figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, -cZ1)
+    figura = translate(figura, largura / 2 - cX1, altura / 2 - cY1, - cZ1)
     plano.projetaPoligonoWireframe(figura, janela)
 
     while (not quadrosChave.quadroChaveCentro(figura, largura, altura)):

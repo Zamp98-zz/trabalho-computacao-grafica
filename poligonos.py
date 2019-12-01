@@ -249,6 +249,7 @@ def get_zig():
 
 def calcula_figura_curva(fig):
     vertices = get_vertices(fig)
+    centro = fig.getCentro()
     gcp0 = []
     j = 12
     while(j < 16):
@@ -322,6 +323,8 @@ def calcula_figura_curva(fig):
     figura = Poligono(arestas, fig.centro, get_faces(fig))
     figura.addVertice(verticesFinal)
     figura.scale = fig.getScale()
+
+    figura.centro = centro
 
     return figura
 
